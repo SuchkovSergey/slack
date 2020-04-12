@@ -1,27 +1,40 @@
 publish:
 	npm publish --dry-run
 
-push:
-	sudo git push origin master
+start:
+	sudo heroku local -f Procfile.dev
 
-lint:
-	npx eslint .
+start-backend:
+	npx nodemon --exec npx babel-node server/bin/slack.js
 
-build:
-	rm -rf dist
-	NODE_ENV=production npx webpack
-
-fix:
-	npx eslint --fix .
-
-install:
-	install-deps install-flow-typed
-
-develop:
+start-frontend:
 	npx webpack-dev-server
 
 install-deps:
 	npm install
 
+push:
+	sudo git push origin master
+
+lint:
+	npx eslint . --ext js,jsx
+
+build:
+	rm -rf dist
+	npm run build
+
+fix:
+	npx eslint --fix .
+
+test:
+	npm test -s
+
+install: install-deps
+
+deploy:
+	sudo git push heroku
+
 install-actions:
 	npm ci
+
+.PHONY: test

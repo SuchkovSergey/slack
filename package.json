@@ -1,7 +1,7 @@
 {
   "name": "slack",
   "version": "1.0.0",
-  "description": "slack",
+  "description": "",
   "main": "dist/index.js",
   "bin": {
     "slack": "dist/bin/slack.js"
@@ -9,6 +9,9 @@
   "engines": {
     "node": ">= 13"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "build-server": "babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",

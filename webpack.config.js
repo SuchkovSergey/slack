@@ -4,7 +4,6 @@
 const isProduction = process.env.NODE_ENV === 'production';
 // const isDevelopment = !isProduction;
 console.log('isProduction', isProduction);
-//         test: /\.(js|jsx)?$/,
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -27,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },

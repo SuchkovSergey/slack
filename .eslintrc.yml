@@ -1,14 +1,15 @@
 ---
 
+extends:
+  - airbnb
+  - "plugin:jest/recommended"
+
+parser: babel-eslint
+
 env:
   browser: true
-  es6: true
   node: true
   jest: true
-
-extends:
-  - 'plugin:react/recommended'
-  - airbnb
 
 settings:
   import/resolver:
@@ -19,5 +20,3 @@ rules:
   import/extensions: 0
   react/prop-types: 0
   no-console: 0
-
-parser: babel-eslint

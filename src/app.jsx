@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Channels from './Channels';
-import Header from './Header';
+import Channels from './Channels.jsx';
+import Header from './Header.jsx';
 
 const app = (data) => {
   const mountNode = document.querySelector('body');

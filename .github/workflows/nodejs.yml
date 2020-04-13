@@ -1,8 +1,8 @@
-
-name: Node.js CI
+name: Node CI
 
 on:
   - push
+  - pull_request
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install
-        run: make install
+        run: make install-actions
       - name: Run linter
         run: make lint
       - name: Run test

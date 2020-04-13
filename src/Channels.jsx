@@ -9,6 +9,7 @@ export default class Channels extends React.Component {
       <ListGroup as="ul">
         <div>hehehe</div>
         <div>hohoho</div>
+        <div>hahaha</div>
         {channels.map((el) => <ListGroup.Item as="li">{el.name}</ListGroup.Item>)}
       </ListGroup>
     );

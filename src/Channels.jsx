@@ -9,8 +9,6 @@ export default class Channels extends React.PureComponent {
       <ListGroup as="ul">
         <div>hehehe</div>
         <div>hehehe</div>
-        <div>hahaha</div>
-        <div>nonono</div>
         {channels.map((el) => <ListGroup.Item as="li">{el.name}</ListGroup.Item>)}
       </ListGroup>
     );

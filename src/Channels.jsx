@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-export default class Channels extends React.Component {
+export default class Channels extends React.PureComponent {
   render() {
     const { data } = this.props;
     const { channels } = data;

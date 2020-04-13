@@ -24,7 +24,7 @@ build:
 	npm run build
 
 fix:
-	npx eslint --fix .
+	npx eslint --fix . --ext js,jsx
 
 test:
 	npm test -s

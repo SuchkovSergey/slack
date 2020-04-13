@@ -2,7 +2,7 @@
   "name": "slack",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/bin/slack.js",
   "bin": {
     "slack": "dist/bin/slack.js"
   },

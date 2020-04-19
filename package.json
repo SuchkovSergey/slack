@@ -14,7 +14,7 @@
     "build-server": "babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
-    "start": "dist/bin/slack.js",
+    "start": "node dist/bin/slack.js",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -31,7 +31,6 @@
     "@types/jest": "^25.2.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.3.0",
-    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",

@@ -1,6 +1,6 @@
 // @ts-check
 
-import 'core-js/stable';
+import 'core-js/stable';// Modular standard library for JavaScript. Includes polyfills for ECMAScript
 import 'regenerator-runtime/runtime';
 
 import path from 'path';

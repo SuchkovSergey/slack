@@ -113,6 +113,7 @@ export default (app, io, defaultState = {}) => {
     })
     .post('/api/v1/channels/:channelId/messages', (req, reply) => {
       const { data: { attributes } } = req.body;
+
       const message = {
         ...attributes,
         channelId: Number(req.params.channelId),
@@ -127,6 +128,7 @@ export default (app, io, defaultState = {}) => {
           attributes: message,
         },
       };
+      console.log(data);
       reply.send(data);
       io.emit('newMessage', data);
     });

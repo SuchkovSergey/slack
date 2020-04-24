@@ -49,6 +49,7 @@ export default (app, io, defaultState = {}) => {
     })
     .post('/api/v1/channels', (req, reply) => {
       const { data: { attributes: { name } } } = req.body;
+      console.log('channel added on server');
       const channel = {
         name,
         removable: true,

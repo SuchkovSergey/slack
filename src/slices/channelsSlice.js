@@ -8,7 +8,8 @@ const channelsSlice = createSlice({
       const { channel } = action.payload;
       const { byId } = state;
       return {
-        byId: byId.push(channel),
+        ...state,
+        byId: [...byId, channel],
         activeId: channel.id,
       };
     },
@@ -21,12 +22,14 @@ const channelsSlice = createSlice({
       };
     },
     renameChannel(state, action) { // рефакторинг
-      const { id, newName } = action.payload;
+      const { channel } = action.payload;
+
+      const { id, name } = channel;
       const { byId } = state;
-      const channel = byId.find((el) => el.id === id);
-      const index = byId.indexOf(channel); // нашли индекс в массиве
+      const channel1 = byId.find((el) => el.id === id);
+      const index = byId.indexOf(channel1); // нашли индекс в массиве
       const newStat = [...byId];
-      const renamedChannel = { ...channel, name: newName };// вероятно, не name
+      const renamedChannel = { ...channel1, name };// вероятно, не name
       newStat[index] = renamedChannel;
       return {
         ...state,

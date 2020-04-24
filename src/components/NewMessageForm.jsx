@@ -12,13 +12,20 @@ const actionCreators = {
   addMessage: { messageActions }.addMessage,
 };
 
+const mapStateToProps = (state) => {
+  const { channels: { activeId } } = state;
+  return { activeId };
+};
+
+
 class NewMessageForm extends React.Component {
     onSubmitHandler = async (values, { resetForm }) => {
+      const { activeId } = this.props;
       document.querySelector('input').focus();
       if (values.text === '') {
         return;
       }
-      await axios.post(routes.channelMessagesPath(0), {
+      await axios.post(routes.channelMessagesPath(activeId), {
         data: {
           attributes: {
             text: values.text, userName: cookies.get('userName'),
@@ -68,5 +75,5 @@ class NewMessageForm extends React.Component {
     }
 }
 
-export default connect(null, actionCreators)(NewMessageForm);
+export default connect(mapStateToProps, actionCreators)(NewMessageForm);
 // export default Channels;

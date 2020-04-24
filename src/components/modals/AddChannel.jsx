@@ -6,23 +6,21 @@ import axios from 'axios';
 import routes from '../../routes';
 
 const generateOnSubmit = ({ onHide }) => async (values) => {
-  if (values.body === '') {
-    return;
-  }
-  await axios.post(routes.channelsPath(), {
-    data: {
-      attributes: {
-        name: values.body,
+  if (values.body !== '') {
+    await axios.post(routes.channelsPath(), {
+      data: {
+        attributes: {
+          name: values.body,
+        },
       },
-    },
-  });
-
+    });
+  }
   onHide();
 };
 
 export default (props) => {
   const { onHide } = props;
-  const f = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { body: '' } });
+  const form = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { body: '' } });
 
   const inputRef = useRef();
   useEffect(() => {
@@ -30,20 +28,22 @@ export default (props) => {
   }, [null]);
 
   return (
-    <Modal.Dialog>
+    <Modal.Dialog size="xl" centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>Add new Channel</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <form onSubmit={f.handleSubmit}>
+        <form onSubmit={form.handleSubmit}>
           <FormGroup>
             <FormControl
               required
               ref={inputRef}
-              onChange={f.handleChange}
-              onBlur={f.handleBlur}
-              value={f.values.body}
+              placeholder="write new channel title here"
+
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+              value={form.values.body}
               name="body"
             />
           </FormGroup>
@@ -55,3 +55,4 @@ export default (props) => {
 };
 // END
 // data-testid="input-body"
+//

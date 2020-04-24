@@ -20,9 +20,16 @@ cookies.set('userName', userName);
 
 
 export default (data) => {
+  io.on('renameChannel', (response) => {
+    store.dispatch(channelsActions.renameChannel({ channel: response.data.attributes }));
+  });
+
+  io.on('removeChannel', (response) => {
+    store.dispatch(channelsActions.removeChannel({ id: response.data.id }));
+  });
+
   io.on('newChannel', (response) => {
-    const channel = { ...response.data.attributes };
-    store.dispatch(channelsActions.addChannel({ channel }));
+    store.dispatch(channelsActions.addChannel({ channel: response.data.attributes }));
   });
 
   io.on('newMessage', (response) => {

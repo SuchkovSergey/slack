@@ -1,31 +1,15 @@
 import { combineReducers } from 'redux';
-// import messageReducer from './messageReducer';
-// import channelsReducer from './channelsReducer';
-import { handleActions } from 'redux-actions';
-import * as actions from '../actions';
+import { configureStore } from '@reduxjs/toolkit';
+import messagesReducer from '../slices/messagesSlice';
+import channelsReducer from '../slices/channelsSlice';
 
-
-const messages = handleActions({
-  [actions.addMessage](state, { payload: { message } }) {
-    const { byId, allIds } = state;
-    return {
-      byId: { ...byId, [message.id]: message },
-      allIds: [message.id, ...allIds],
-    };
-  },
-}, { byId: {}, allIds: [] });
-
-
-
-
-export default combineReducers({
-  messages,
+const rootReducer = combineReducers({
+  messages: messagesReducer,
+  channels: channelsReducer,
 });
 
+const store = configureStore({
+  reducer: rootReducer,
+});
 
-// const rootReducer = combineReducers({
-//   messages: messageReducer,
-//   channels: channelsReducer,
-// });
-
-// export default rootReducer;
+export default store;

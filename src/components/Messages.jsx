@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions'
+import { messageActions } from '../slices/messagesSlice';
+
 
 const mapStateToProps = (state) => {
   const { messages: { byId, allIds } } = state;
@@ -9,56 +10,42 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  addMessage: actions.addMessage,
+  addMessage: messageActions.addMessage,
 };
 
 class Messages extends React.PureComponent {
+  componentDidMount() {
+    const { data, addMessage } = this.props;
+    const { messages } = data;
+    messages.forEach((element) => { addMessage({ message: element }); });
+  }
+
   renderMessages = (messages) => {
     if (messages.length === 0) {
       return null;
     }
-   
+
     return (
       <div id="messages-box" className="chat-messages overflow-auto mb-3">
         <ul className="list-group">
-          {messages.map(({ text, id }) => (
-            <li key={id} className="d-flex"><b>{'Username: '}</b>{text}</li>
+          {messages.map(({ text, id, userName }) => (
+            <li key={id} className="d-flex">
+              <b>
+                {userName}
+                :
+              </b>
+              {text}
+            </li>
           ))}
         </ul>
       </div>
     );
   }
 
-  componentDidMount() {
-    const { data, addMessage } = this.props;
-    const { messages } = data;
-    // console.log('mount', messages);
-    messages.forEach((element) => { addMessage({ message: element })  });
-  }
-  
   render() {
     const { messages } = this.props;
     return this.renderMessages(messages);
   }
 }
-<div id="messages-box" class="chat-messages overflow-auto mb-3"></div>
+// <div id="messages-box" className="chat-messages overflow-auto mb-3" />;
 export default connect(mapStateToProps, actionCreators)(Messages);
-
-
-
-const symbols = (num) => {
-  const result = [];
-  for (let i = 0; i < num; i += 1) {
-    result.push(i);
-  }
-  return (
-    <div>
-      {result.map(() => (
-        <div>
-          <b>Сергей Сучков</b>
-          : Проверка проверочка
-        </div>
-      ))}
-    </div>
-  );
-};

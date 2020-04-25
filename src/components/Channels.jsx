@@ -1,6 +1,5 @@
-// import React from 'react';
+import i18next from 'i18next';
 import { Nav } from 'react-bootstrap';
-// import _ from 'lodash';
 import cn from 'classnames';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
@@ -17,33 +16,28 @@ const actionCreators = {
   selectChannel: channelsActions.selectChannel,
 };
 
-
 const Channels = (props) => {
   useEffect(() => {
-    const { data, addChannel } = props;
+    const { data, addChannel, selectChannel } = props;
     const { channels } = data;
     channels.forEach((element) => { addChannel({ channel: element }); });
-  }, [null]);// ,[null]
+    selectChannel({ id: 1 });
+  }, [null]);
 
 
-  const handleSelectChannel = (id) => (e) => { // тут косяк
+  const handleSelectChannel = (id) => (e) => {
     e.preventDefault();
     const { selectChannel } = props;
     selectChannel({ id });
   };
 
-
-  // onClick={this.handleSelectChannel}
-
-
-  const { allChannels, activeId } = props;
-  const { showModal } = props;
+  const { allChannels, activeId, showModal } = props;
 
   return (
-    <div>
+    <div className="mt-2">
       <div className="d-flex mb-2">
-        <span>Channels</span>
-        <button onClick={() => showModal('addChannel')} type="button" className="btn btn-link p-0 ml-auto">Add new</button>
+        <span>{i18next.t('channels')}</span>
+        <button onClick={() => showModal('addChannel')} type="button" className="btn btn-link p-0 ml-auto">{i18next.t('addNewChannel')}</button>
       </div>
       <Nav as="ul" className="flex-column nav-pills" variant="nav-fill">
         {allChannels.map((el) => {
@@ -52,17 +46,13 @@ const Channels = (props) => {
             active: el.id === activeId,
           });
           return (
-
             <Nav.Item key={el.id} as="li">
               <button type="button" className={btnClass} onClick={handleSelectChannel(el.id)}>
                 <div className="float-left">{el.name}</div>
                 {el.removable && <TrashFill onClick={() => showModal('removeChannel', el)} className="float-right" />}
                 {el.removable && <PencilSquare onClick={() => showModal('renameChannel', el)} className="float-right" />}
-
               </button>
-
             </Nav.Item>
-
           );
         })}
       </Nav>
@@ -70,6 +60,4 @@ const Channels = (props) => {
   );
 };
 
-// onClick={() => showModal('renameChannel', el)}
 export default connect(mapStateToProps, actionCreators)(Channels);
-// { /* <Nav.Link href="/home" className="center-block active">{el.name}</Nav.Link> */ }

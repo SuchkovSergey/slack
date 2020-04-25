@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import React, { useEffect, useRef } from 'react';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
@@ -23,12 +24,13 @@ export default (props) => {
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
+    inputRef.current.select();
   }, [null]);
 
   return (
     <Modal.Dialog size="lg" centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Write new title here</Modal.Title>
+        <Modal.Title>{i18next.t('renameTitle')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -43,7 +45,7 @@ export default (props) => {
               name="body"
             />
           </FormGroup>
-          <input type="submit" className="btn btn-primary" value="submit" />
+          <input type="submit" className="btn btn-primary" value={i18next.t('renameChannel')} />
         </form>
       </Modal.Body>
     </Modal.Dialog>

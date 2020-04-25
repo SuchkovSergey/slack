@@ -21,16 +21,13 @@ const channelsSlice = createSlice({
         activeId: 0,
       };
     },
-    renameChannel(state, action) { // рефакторинг
-      const { channel } = action.payload;
-
-      const { id, name } = channel;
+    renameChannel(state, action) {
+      const { channel: { id, name } } = action.payload;
       const { byId } = state;
-      const channel1 = byId.find((el) => el.id === id);
-      const index = byId.indexOf(channel1); // нашли индекс в массиве
+      const renamedChannel = byId.find((el) => el.id === id);
+      const index = byId.indexOf(renamedChannel);
       const newStat = [...byId];
-      const renamedChannel = { ...channel1, name };// вероятно, не name
-      newStat[index] = renamedChannel;
+      newStat[index] = { ...renamedChannel, name };
       return {
         ...state,
         byId: newStat,
@@ -45,7 +42,7 @@ const channelsSlice = createSlice({
     },
   },
 });
-const channelsActions = channelsSlice.actions;
 
+const channelsActions = channelsSlice.actions;
 export { channelsActions };
 export default channelsSlice.reducer;

@@ -6,12 +6,27 @@
 
 ### About
 
+Chat with friends, colleagues and family wherever you are!
+You could create new channels, rename and remove them
+
 ### New experience
 
+* React
+* Redux (including Redux Toolkit)
 * Webpack
+* Web Sockets
+* Bootstrap React
+* Deploy (Heroku)
+* Cookies
 
 ### Installing
 
 ```
 npm install slack
+```
+
+### Starting
+
+```
+make start
 ```

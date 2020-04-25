@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import React, { useEffect, useRef } from 'react';
 import { Modal, FormGroup } from 'react-bootstrap';
 import axios from 'axios';
@@ -20,13 +21,12 @@ export default (props) => {
   return (
     <Modal.Dialog size="lg" centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Are you sure?</Modal.Title>
+        <Modal.Title>{i18next.t('removeTitle')}</Modal.Title>
       </Modal.Header>
-
       <Modal.Body>
         <form onSubmit={onSubmit}>
           <FormGroup>
-            <input ref={inputRef} type="submit" className="btn btn-danger" value="remove" />
+            <input ref={inputRef} type="submit" className="btn btn-danger" value={i18next.t('removeChannel')} />
           </FormGroup>
         </form>
       </Modal.Body>

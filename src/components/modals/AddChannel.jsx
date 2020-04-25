@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import i18next from 'i18next';
 // import _ from 'lodash';
 import { useFormik } from 'formik';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
@@ -30,7 +31,7 @@ export default (props) => {
   return (
     <Modal.Dialog size="xl" centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>Add new Channel</Modal.Title>
+        <Modal.Title>{i18next.t('addNewChannelVersionTwo')}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -39,15 +40,14 @@ export default (props) => {
             <FormControl
               required
               ref={inputRef}
-              placeholder="write new channel title here"
-
+              placeholder={i18next.t('addChanelPlaceholder')}
               onChange={form.handleChange}
               onBlur={form.handleBlur}
               value={form.values.body}
               name="body"
             />
           </FormGroup>
-          <input type="submit" className="btn btn-primary" value="submit" />
+          <input type="submit" className="btn btn-primary" value={i18next.t('addNewChannel')} />
         </form>
       </Modal.Body>
     </Modal.Dialog>

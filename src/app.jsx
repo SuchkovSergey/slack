@@ -11,9 +11,6 @@ import store from './reducers';
 import listenSocket from './webSockets';
 
 const userName = faker.name.findName();
-// const userName = prompt('Your name, dear')
-// console.log(userName);
-
 cookies.set('userName', userName.toString()); // cookies.get('userName');
 
 export default (data) => {

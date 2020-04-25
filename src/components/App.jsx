@@ -47,7 +47,7 @@ const App = (props) => {
       <div className="col-9 h-100" style={{ backgroundColor: '#E1ECF9' }}>
         <div className="d-flex flex-column h-100">
           <Messages data={data} />
-          <NewMessageForm />
+          <NewMessageForm showModal={showModal} />
         </div>
       </div>
       {renderModal({ modalInfo, hideModal })}

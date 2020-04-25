@@ -19,19 +19,10 @@ const mapStateToProps = (state) => {
 
 const NewMessageForm = (props) => {
   const [errorMessage, setErrorMessage] = useState({ text: null, show: false });
-  const { showModal } = props;
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
   });
-
-  // useEffect(() => {
-  //   showModal('userName');
-  // }, [null]);
-
-  if (!cookies.get('userName')) {
-    showModal('userName');
-  }
 
   const onSubmitHandler = (values, { resetForm }) => {
     const { activeId } = props;
@@ -41,7 +32,6 @@ const NewMessageForm = (props) => {
     }
 
     const date = new Date();
-    // const sendTime = `${date.getHours()}:${date.getMinutes()}`;
     const sendTime = date.toTimeString().split(' ')[0];
 
     axios.post(routes.channelMessagesPath(activeId), {
@@ -58,7 +48,6 @@ const NewMessageForm = (props) => {
 
     resetForm({});
   };
-
 
   return (
     <div className="app mt-auto">

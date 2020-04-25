@@ -4,6 +4,7 @@ export default {
   translation: {
     languages,
     channels: 'Channels',
+    settings: 'Settings',
     addNewChannel: 'Add',
     addNewChannelVersionTwo: 'Add new Channel',
     addChanelPlaceholder: 'Write new channel title here',
@@ -12,11 +13,12 @@ export default {
     removeTitle: 'Are you sure?',
     renameChannel: 'Rename',
     renameTitle: 'Write new title here',
-    userNameModalTitle: "Hi! Guess you're new here!\nPlease, leave your name below\nOtherwise there will be a random one ;)\nHope you'll enjoy!",
+    userNameModalTitle: "Hi! It seems that you wanna change your name in the chat.\nPlease, leave it below.\nOtherwise there will be a random one ;)\nHope you'll enjoy!",
     userNameModalName: "What's your name?",
     userNamePlaceholder: 'for example, Sergey',
     userNameModalSurname: "What's your surname?",
     userSuramePlaceholder: 'for example, Suchkov',
+    userNameButton: 'Change my name',
     userNameModalSubmit: 'Confirm',
     errorMessages: {
       network: 'Network problems. Please, try later',

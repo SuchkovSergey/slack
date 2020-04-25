@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Messages from './Messages';
 import NewMessageForm from './NewMessageForm';
 import Channels from './Channels';
+import Settings from './Settings';
 import getModal from './modals/index.js';
 // import cookies from 'js-cookie';
 
@@ -26,7 +27,7 @@ const renderModal = ({ modalInfo, hideModal }) => {
     return null;
   }
   const Component = getModal(modalInfo.type);
-  return <Component modalInfo={modalInfo} onHide={hideModal} size="xl" />;
+  return <Component modalInfo={modalInfo} onHide={hideModal} />;
 };
 
 const App = (props) => {
@@ -43,6 +44,7 @@ const App = (props) => {
     <div className="row h-100 pb-3">
       <div className="col-3 border-right">
         <Channels data={data} showModal={showModal} />
+        <Settings showModal={showModal} />
       </div>
       <div className="col-9 h-100" style={{ backgroundColor: '#E1ECF9' }}>
         <div className="d-flex flex-column h-100">

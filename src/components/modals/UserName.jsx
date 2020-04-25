@@ -38,7 +38,7 @@ export default (props) => {
               value={form.values.name}
               name="name"
             />
-            <FormLabel>{i18next.t('userNameModalSurname')}</FormLabel>
+            <FormLabel className="mt-2">{i18next.t('userNameModalSurname')}</FormLabel>
             <FormControl
               required
               placeholder={i18next.t('userSuramePlaceholder')}

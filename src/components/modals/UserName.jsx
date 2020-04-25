@@ -15,10 +15,12 @@ const generateOnSubmit = ({ onHide }) => (values) => {
 export default (props) => {
   const form = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { name: '', surname: '' } });
   const { onHide } = props;
+
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
   }, [null]);
+
   return (
     <Modal.Dialog centered>
       <Modal.Header closeButton onHide={onHide}>

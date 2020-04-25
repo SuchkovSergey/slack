@@ -32,7 +32,6 @@ export default (props) => {
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>{i18next.t('renameTitle')}</Modal.Title>
       </Modal.Header>
-
       <Modal.Body>
         <form onSubmit={form.handleSubmit}>
           <FormGroup>

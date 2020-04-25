@@ -8,7 +8,6 @@ const channelsSlice = createSlice({
       const { channel } = action.payload;
       const { byId } = state;
       return {
-        ...state,
         byId: [...byId, channel],
         activeId: channel.id,
       };
@@ -26,11 +25,11 @@ const channelsSlice = createSlice({
       const { byId } = state;
       const renamedChannel = byId.find((el) => el.id === id);
       const index = byId.indexOf(renamedChannel);
-      const newStat = [...byId];
-      newStat[index] = { ...renamedChannel, name };
+      const newById = [...byId];
+      newById[index] = { ...renamedChannel, name };
       return {
         ...state,
-        byId: newStat,
+        byId: newById,
       };
     },
     selectChannel(state, action) {

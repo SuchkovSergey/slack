@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import i18next from 'i18next';
-// import _ from 'lodash';
 import { useFormik } from 'formik';
 import { Modal, FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
@@ -33,7 +32,6 @@ export default (props) => {
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>{i18next.t('addNewChannelVersionTwo')}</Modal.Title>
       </Modal.Header>
-
       <Modal.Body>
         <form onSubmit={form.handleSubmit}>
           <FormGroup>
@@ -54,5 +52,3 @@ export default (props) => {
   );
 };
 // END
-// data-testid="input-body"
-//

@@ -6,12 +6,6 @@ import cookies from 'js-cookie';
 import $ from 'jquery';
 import { messageActions } from '../slices/messagesSlice';
 
-// const userName = cookies.get('userName');
-// const MyContext = React.createContext({});
-// const ThingsProvider = MyContext.Provider
-// const things = useContext(MyContext)
-
-
 const mapStateToProps = (state) => {
   const { messages: { byId }, channels: { activeId } } = state;
   const messages = Object.values(byId);
@@ -82,3 +76,8 @@ const Messages = (props) => {
 };
 
 export default connect(mapStateToProps, actionCreators)(Messages);
+
+// const userName = cookies.get('userName');
+// const MyContext = React.createContext({});
+// const ThingsProvider = MyContext.Provider
+// const things = useContext(MyContext)

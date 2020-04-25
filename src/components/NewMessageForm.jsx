@@ -77,7 +77,6 @@ const NewMessageForm = (props) => {
               <div className="input-feedback text-danger">{errorMessage.text}</div>
               )}
               <div className="d-block invalid-feedback">&nbsp;</div>
-
             </form>
           );
         }}

@@ -6,7 +6,13 @@ const Settings = (props) => {
   return (
     <div className="mt-4">
       <h5 className="d-flex">{i18next.t('settings')}</h5>
-      <button onClick={() => showModal('userName')} className="btn btn-info m-1 w-100 center-block">{i18next.t('userNameButton')}</button>
+      <button
+        type="submit"
+        onClick={() => showModal('userName')}
+        className="btn btn-info m-1 w-100 center-block"
+      >
+        {i18next.t('userNameButton')}
+      </button>
     </div>
   );
 };

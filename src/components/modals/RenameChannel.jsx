@@ -18,7 +18,7 @@ const generateOnSubmit = ({ modalInfo, onHide }) => async (values) => {
 
 export default (props) => {
   const { onHide, modalInfo } = props;
-  const { name } = modalInfo.item;
+  const { item: { name } } = modalInfo;
   const form = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { body: name } });
 
   const inputRef = useRef();

@@ -8,8 +8,8 @@ import { messageActions } from '../slices/messagesSlice';
 
 const mapStateToProps = (state) => {
   const { messages: { byId }, channels: { activeId } } = state;
-  const messages = Object.values(byId);
-  return { messages, activeId };
+  const allMessages = Object.values(byId).filter((el) => el.channelId === activeId);
+  return { allMessages, activeId };
 };
 
 const actionCreators = {
@@ -18,64 +18,52 @@ const actionCreators = {
 
 const scrollMessagesTop = () => $('#messages-box').animate({ scrollTop: 100000 }, 'slow');
 
+const renderMessages = (messages) => {
+  if (messages.length === 0) { return null; }
+  scrollMessagesTop();
+  const currentUser = cookies.get('userName');
+
+  return messages.map((message) => {
+    const {
+      text, id, userName, sendTime,
+    } = message;
+    const messageArea = (
+      <Button className="border-0 text-left" variant="outline-dark" style={{ backgroundColor: '#F6FFF7' }}>
+        <div>
+          {text}
+          <font className="m-1" size="2" color="gray">{sendTime}</font>
+        </div>
+      </Button>
+    );
+    const userNameArea = <b className="m-1">{userName}</b>;
+    return currentUser === userName
+      ? (
+        <div key={id} className="text-right m-2">
+          {messageArea}
+          {userNameArea}
+        </div>
+      )
+      : (
+        <div key={id} className="m-2">
+          {userNameArea}
+          {messageArea}
+        </div>
+      );
+  });
+};
+
 const Messages = (props) => {
+  const { data: { messages }, addMessage, allMessages } = props;
+
   useEffect(() => {
-    const { data, addMessage } = props;
-    const { messages } = data;
-    messages.forEach((element) => { addMessage({ message: element }); });
+    messages.forEach((el) => { addMessage({ message: el }); });
   }, [null]);
 
-  const renderMessages = (messages) => {
-    if (messages.length === 0) {
-      return null;
-    }
-    const { activeId } = props;
-    const preRender = messages.map((message) => {
-      const {
-        text, id, userName, channelId, sendTime,
-      } = message;
-      const currentUser = cookies.get('userName');
-      if (channelId !== activeId) {
-        return '';
-      }
-      const messageArea = (
-        <Button className="border-0" variant="outline-dark" style={{ backgroundColor: '#F6FFF7' }}>
-          <div>
-            {text}
-            <font className="m-1" size="2" color="gray">{sendTime}</font>
-          </div>
-        </Button>
-      );
-      const userNameArea = <b className="m-1">{userName}</b>;
-      return currentUser === userName
-        ? (
-          <div key={id} className="text-right m-2">
-            {messageArea}
-            {userNameArea}
-          </div>
-        )
-        : (
-          <div key={id} className="m-2">
-            {userNameArea}
-            {messageArea}
-          </div>
-        );
-    });
-
-    scrollMessagesTop();
-
-    return (
-      <div id="messages-box" className="chat-messages overflow-auto mb-1">
-        {preRender}
-      </div>
-    );
-  };
-
-  const { messages } = props;
-  return renderMessages(messages);
+  return renderMessages(allMessages);
 };
 
 export default connect(mapStateToProps, actionCreators)(Messages);
+
 
 // const userName = cookies.get('userName');
 // const MyContext = React.createContext({});

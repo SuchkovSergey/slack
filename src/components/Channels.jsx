@@ -17,8 +17,11 @@ const actionCreators = {
 };
 
 const Channels = (props) => {
+  const {
+    allChannels, activeId, showModal, selectChannel, addChannel, data,
+  } = props;
+
   useEffect(() => {
-    const { data, addChannel, selectChannel } = props;
     const { channels } = data;
     channels.forEach((element) => { addChannel({ channel: element }); });
     selectChannel({ id: 1 });
@@ -27,11 +30,8 @@ const Channels = (props) => {
 
   const handleSelectChannel = (id) => (e) => {
     e.preventDefault();
-    const { selectChannel } = props;
     selectChannel({ id });
   };
-
-  const { allChannels, activeId, showModal } = props;
 
   return (
     <div className="mt-2">

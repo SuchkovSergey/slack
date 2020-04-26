@@ -47,7 +47,9 @@ const App = (props) => {
       </div>
       <div className="col-9 h-100" style={{ backgroundColor: '#E1ECF9' }}>
         <div className="d-flex flex-column h-100">
-          <Messages data={data} />
+          <div id="messages-box" className="chat-messages overflow-auto mb-1">
+            <Messages data={data} />
+          </div>
           <NewMessageForm showModal={showModal} />
         </div>
       </div>

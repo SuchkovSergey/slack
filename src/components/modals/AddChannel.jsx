@@ -6,15 +6,13 @@ import axios from 'axios';
 import routes from '../../routes';
 
 const generateOnSubmit = ({ onHide }) => async (values) => {
-  if (values.body !== '') {
-    await axios.post(routes.channelsPath(), {
-      data: {
-        attributes: {
-          name: values.body,
-        },
+  await axios.post(routes.channelsPath(), {
+    data: {
+      attributes: {
+        name: values.body,
       },
-    });
-  }
+    },
+  });
   onHide();
 };
 
@@ -28,7 +26,7 @@ export default (props) => {
   }, [null]);
 
   return (
-    <Modal.Dialog size="xl" centered aria-labelledby="contained-modal-title-vcenter">
+    <Modal.Dialog centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>{i18next.t('addNewChannelVersionTwo')}</Modal.Title>
       </Modal.Header>
@@ -51,4 +49,3 @@ export default (props) => {
     </Modal.Dialog>
   );
 };
-// END

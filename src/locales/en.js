@@ -5,6 +5,7 @@ export default {
     languages,
     channels: 'Channels',
     settings: 'Settings',
+    sendButton: 'Send',
     addNewChannel: 'Add',
     addNewChannelVersionTwo: 'Add new Channel',
     addChanelPlaceholder: 'Write new channel title here',

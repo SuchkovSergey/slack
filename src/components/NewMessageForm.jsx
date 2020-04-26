@@ -8,13 +8,14 @@ import cookies from 'js-cookie';
 import routes from '../routes';
 import { messageActions } from '../slices/messagesSlice';
 
-const actionCreators = {
-  addMessage: messageActions.addMessage,
-};
 
 const mapStateToProps = (state) => {
   const { channels: { activeId } } = state;
   return { activeId };
+};
+
+const actionCreators = {
+  addMessage: messageActions.addMessage,
 };
 
 const NewMessageForm = (props) => {
@@ -63,7 +64,7 @@ const NewMessageForm = (props) => {
             handleSubmit,
           } = formProps;
           return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="input-group">
               <FormControl
                 id="text"
                 ref={inputRef}
@@ -73,6 +74,9 @@ const NewMessageForm = (props) => {
                 onChange={handleChange}
                 disabled={isSubmitting}
               />
+              <span className="input-group-btn">
+                <button type="submit" className="btn btn-info">{i18next.t('sendButton')}</button>
+              </span>
               {errorMessage.show && (
               <div className="input-feedback text-danger">{errorMessage.text}</div>
               )}

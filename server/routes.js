@@ -9,8 +9,8 @@ const buildState = (defaultState) => {
   const randomChannelId = getNextId();
   const state = {
     channels: [
-      { id: generalChannelId, name: 'general', removable: false },
-      { id: randomChannelId, name: 'random', removable: false },
+      { id: generalChannelId, name: 'General', removable: false },
+      { id: randomChannelId, name: 'Random', removable: false },
     ],
     messages: [],
     currentChannelId: generalChannelId,

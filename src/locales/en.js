@@ -6,7 +6,7 @@ export default {
     channels: 'Channels',
     settings: 'Settings',
     sendButton: 'Send',
-    addNewChannel: 'Add',
+    addNewChannel: 'Add new',
     addNewChannelVersionTwo: 'Add new Channel',
     addChanelPlaceholder: 'Write new channel title here',
     mainInputPlaceholder: 'Write your message here',
@@ -21,7 +21,7 @@ export default {
     userSuramePlaceholder: 'for example, Suchkov',
     userNameButton: 'Change my name',
     userNameModalSubmit: 'Confirm',
-    errorMessages: {
+    errors: {
       network: 'Network problems. Please, try later',
     },
   },

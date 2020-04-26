@@ -18,20 +18,35 @@ const actionCreators = {
 
 const Channels = (props) => {
   const {
-    allChannels, activeId, showModal, selectChannel, addChannel, data,
+    allChannels, activeId, showModal, selectChannel, addChannel, data: { channels },
   } = props;
 
   useEffect(() => {
-    const { channels } = data;
     channels.forEach((element) => { addChannel({ channel: element }); });
     selectChannel({ id: 1 });
   }, [null]);
 
+  const handleSelectChannel = (id) => () => { selectChannel({ id }); };
 
-  const handleSelectChannel = (id) => (e) => {
-    e.preventDefault();
-    selectChannel({ id });
-  };
+  const renderNavs = allChannels.map((el) => {
+    const btnClass = cn({
+      'nav-link btn btn-block m-1': true,
+      active: el.id === activeId,
+    });
+    return (
+      <Nav.Item key={el.id} as="li">
+        <button type="button" className={btnClass} onClick={handleSelectChannel(el.id)}>
+          <div className="float-left">{el.name}</div>
+          {el.removable && (
+            <div className="float-right align-middle">
+              <TrashFill onClick={() => showModal('removeChannel', el)} className="mr-1" />
+              <PencilSquare onClick={() => showModal('renameChannel', el)} />
+            </div>
+          )}
+        </button>
+      </Nav.Item>
+    );
+  });
 
   return (
     <div className="mt-2">
@@ -46,23 +61,7 @@ const Channels = (props) => {
         </button>
       </h5>
       <Nav as="ul" className="flex-column nav-pills" variant="nav-fill">
-        {allChannels.map((el) => {
-          const btnClass = cn({
-            'nav-link btn btn-block m-1': true,
-            active: el.id === activeId,
-          });
-          return (
-            <Nav.Item key={el.id} as="li">
-              <button type="button" className={btnClass} onClick={handleSelectChannel(el.id)}>
-                <div className="float-left">{el.name}</div>
-                <div className="float-right align-middle">
-                  {el.removable && <TrashFill onClick={() => showModal('removeChannel', el)} className="mr-1" />}
-                  {el.removable && <PencilSquare onClick={() => showModal('renameChannel', el)} />}
-                </div>
-              </button>
-            </Nav.Item>
-          );
-        })}
+        {renderNavs}
       </Nav>
     </div>
   );

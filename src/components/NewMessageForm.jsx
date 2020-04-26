@@ -8,7 +8,6 @@ import cookies from 'js-cookie';
 import routes from '../routes';
 import { messageActions } from '../slices/messagesSlice';
 
-
 const mapStateToProps = (state) => {
   const { channels: { activeId } } = state;
   return { activeId };
@@ -19,71 +18,60 @@ const actionCreators = {
 };
 
 const NewMessageForm = (props) => {
-  const [errorMessage, setErrorMessage] = useState({ text: null, show: false });
+  const [showError, setError] = useState(false);
   const inputRef = useRef();
-  useEffect(() => {
-    inputRef.current.focus();
-  });
 
   const onSubmitHandler = (values, { resetForm }) => {
     const { activeId } = props;
-    document.querySelector('input').focus();
-    if (values.text === '') {
-      return;
-    }
-
     const date = new Date();
-    const sendTime = date.toTimeString().split(' ')[0];
-
-    axios.post(routes.channelMessagesPath(activeId), {
-      data: {
-        attributes: {
-          text: values.text, userName: cookies.get('userName'), sendTime,
+    axios
+      .post(routes.channelMessagesPath(activeId), {
+        data: {
+          attributes: {
+            text: values.text,
+            userName: cookies.get('userName'),
+            sendTime: date.toTimeString().split(' ')[0],
+          },
         },
-      },
-    }).then(() => {
-      setErrorMessage({ text: null, show: false });
-    }).catch(() => {
-      setErrorMessage({ text: i18next.t('errorMessages.network'), show: true });
-    });
+      })
+      .then(() => { setError(false); })
+      .catch(() => { setError(true); });
 
     resetForm({});
   };
 
+  const formikElement = ({
+    values, isSubmitting, handleChange, handleSubmit,
+  }) => {
+    useEffect(() => {
+      inputRef.current.focus();
+    });
+
+    return (
+      <form onSubmit={handleSubmit} className="input-group">
+        <FormControl
+          id="text"
+          required
+          ref={inputRef}
+          placeholder={i18next.t('mainInputPlaceholder')}
+          type="text"
+          value={values.text}
+          onChange={handleChange}
+          disabled={isSubmitting}
+        />
+        <button type="submit" className="input-group-btn btn btn-info">{i18next.t('sendButton')}</button>
+        <div className="d-block invalid-feedback">
+          {showError && (<div className="input-feedback text-danger">{i18next.t('errors.network')}</div>)}
+        &nbsp;
+        </div>
+      </form>
+    );
+  };
+
   return (
     <div className="app mt-auto">
-      <Formik
-        initialValues={{ text: '' }}
-        onSubmit={onSubmitHandler}
-      >
-        {(formProps) => {
-          const {
-            values,
-            isSubmitting,
-            handleChange,
-            handleSubmit,
-          } = formProps;
-          return (
-            <form onSubmit={handleSubmit} className="input-group">
-              <FormControl
-                id="text"
-                ref={inputRef}
-                placeholder={i18next.t('mainInputPlaceholder')}
-                type="text"
-                value={values.text}
-                onChange={handleChange}
-                disabled={isSubmitting}
-              />
-              <span className="input-group-btn">
-                <button type="submit" className="btn btn-info">{i18next.t('sendButton')}</button>
-              </span>
-              {errorMessage.show && (
-              <div className="input-feedback text-danger">{errorMessage.text}</div>
-              )}
-              <div className="d-block invalid-feedback">&nbsp;</div>
-            </form>
-          );
-        }}
+      <Formik initialValues={{ text: '' }} onSubmit={onSubmitHandler}>
+        {formikElement}
       </Formik>
     </div>
   );

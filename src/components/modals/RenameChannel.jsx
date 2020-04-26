@@ -28,7 +28,7 @@ export default (props) => {
   }, [null]);
 
   return (
-    <Modal.Dialog size="lg" centered aria-labelledby="contained-modal-title-vcenter">
+    <Modal.Dialog centered aria-labelledby="contained-modal-title-vcenter">
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>{i18next.t('renameTitle')}</Modal.Title>
       </Modal.Header>

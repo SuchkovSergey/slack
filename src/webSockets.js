@@ -4,18 +4,13 @@ import { messageActions } from './slices/messagesSlice';
 import { channelsActions } from './slices/channelsSlice';
 
 export default () => {
-  const io = socket.connect();
+  const { addMessage } = messageActions;
+  const { addChannel, renameChannel, removeChannel } = channelsActions;
 
-  io.on('newMessage', (response) => {
-    store.dispatch(messageActions.addMessage({ message: response.data.attributes }));
-  });
-  io.on('newChannel', (response) => {
-    store.dispatch(channelsActions.addChannel({ channel: response.data.attributes }));
-  });
-  io.on('renameChannel', (response) => {
-    store.dispatch(channelsActions.renameChannel({ channel: response.data.attributes }));
-  });
-  io.on('removeChannel', (response) => {
-    store.dispatch(channelsActions.removeChannel({ id: response.data.id }));
-  });
+  socket
+    .connect()
+    .on('newMessage', (res) => { store.dispatch(addMessage({ message: res.data.attributes })); })
+    .on('newChannel', (res) => { store.dispatch(addChannel({ channel: res.data.attributes })); })
+    .on('renameChannel', (res) => { store.dispatch(renameChannel({ channel: res.data.attributes })); })
+    .on('removeChannel', (res) => { store.dispatch(removeChannel({ id: res.data.id })); });
 };

@@ -17,14 +17,14 @@ test('get /channels', async () => {
       type: 'channels',
       id: expect.any(Number),
       attributes: {
-        id: expect.any(Number), name: 'general', removable: false,
+        id: expect.any(Number), name: 'General', removable: false,
       },
     },
     {
       type: 'channels',
       id: expect.any(Number),
       attributes: {
-        id: expect.any(Number), name: 'random', removable: false,
+        id: expect.any(Number), name: 'Random', removable: false,
       },
     },
   ];

@@ -1,7 +1,7 @@
 import socket from 'socket.io-client';
 import store from './reducers';
-import { messageActions } from './slices/messagesSlice';
-import { channelsActions } from './slices/channelsSlice';
+import messageActions from './slices/messagesSlice';
+import channelsActions from './slices/channelsSlice';
 
 export default () => {
   const { addMessage } = messageActions;

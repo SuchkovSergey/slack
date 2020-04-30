@@ -1,15 +1,10 @@
 import i18next from 'i18next';
 import { Nav } from 'react-bootstrap';
 import cn from 'classnames';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import { TrashFill, PencilSquare } from 'react-bootstrap-icons';
-import { channelsActions } from '../slices/channelsSlice';
-
-const mapStateToProps = (state) => {
-  const { channels: { byId, activeId } } = state;
-  return { allChannels: byId, activeId };
-};
+import channelsActions from '../slices/channelsSlice';
 
 const actionCreators = {
   addChannel: channelsActions.addChannel,
@@ -17,13 +12,17 @@ const actionCreators = {
 };
 
 const Channels = (props) => {
+  const allChannels = useSelector(({ channels: { byId } }) => byId);
+  const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
+
   const {
-    allChannels, activeId, showModal, selectChannel, addChannel, data: { channels },
+    showModal, selectChannel, addChannel, data: { channels },
   } = props;
 
+  const defaultChannelId = 1;
   useEffect(() => {
     channels.forEach((element) => { addChannel({ channel: element }); });
-    selectChannel({ id: 1 });
+    selectChannel({ id: defaultChannelId });
   }, [null]);
 
   const handleSelectChannel = (id) => () => { selectChannel({ id }); };
@@ -31,7 +30,7 @@ const Channels = (props) => {
   const renderNavs = allChannels.map((el) => {
     const btnClass = cn({
       'nav-link btn btn-block m-1': true,
-      active: el.id === activeId,
+      active: el.id === activeChannelId,
     });
     return (
       <Nav.Item key={el.id} as="li">
@@ -67,4 +66,4 @@ const Channels = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actionCreators)(Channels);
+export default connect(null, actionCreators)(Channels);

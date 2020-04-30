@@ -1,28 +1,24 @@
 import i18next from 'i18next';
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Formik } from 'formik';
 import { FormControl } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import routes from '../routes';
-import { messageActions } from '../slices/messagesSlice';
-
-const mapStateToProps = (state) => {
-  const { channels: { activeId } } = state;
-  return { activeId };
-};
+import messageActions from '../slices/messagesSlice';
 
 const actionCreators = {
   addMessage: messageActions.addMessage,
 };
 
-const NewMessageForm = (props) => {
+const NewMessageForm = () => {
+  const { activeId } = useSelector((state) => state.channels);
+
   const [showError, setError] = useState(false);
   const inputRef = useRef();
 
   const onSubmitHandler = (values, { resetForm }) => {
-    const { activeId } = props;
     const date = new Date();
     axios
       .post(routes.channelMessagesPath(activeId), {
@@ -77,4 +73,4 @@ const NewMessageForm = (props) => {
   );
 };
 
-export default connect(mapStateToProps, actionCreators)(NewMessageForm);
+export default connect(null, actionCreators)(NewMessageForm);

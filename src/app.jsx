@@ -10,9 +10,6 @@ import App from './components/App';
 import store from './reducers';
 import listenSocket from './webSockets';
 
-const userName = faker.name.findName();
-cookies.set('userName', userName); // cookies.get('userName');
-
 export default (data) => {
   i18next.init({
     lng: 'en',
@@ -20,6 +17,7 @@ export default (data) => {
     resources,
   });
 
+  cookies.set('userName', faker.name.findName());
   listenSocket();
 
   render(

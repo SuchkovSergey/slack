@@ -2,17 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const messagesSlice = createSlice({
   name: 'messages',
-  initialState: { byId: {} },
+  initialState: [],
   reducers: {
     addMessage(state, action) {
       const { message } = action.payload;
-      const { byId } = state;
-      return {
-        byId: { ...byId, [message.id]: message },
-      };
+      return [...state, message];
+    },
+    removeChannel(state, action) {
+      const { id } = action.payload;
+      return state.filter((el) => el.channelId === id);
     },
   },
 });
-const messageActions = messagesSlice.actions;
-export { messageActions };
-export default messagesSlice.reducer;
+
+export default messagesSlice.actions;
+export const { reducer } = messagesSlice;

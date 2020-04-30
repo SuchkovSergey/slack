@@ -1,16 +1,9 @@
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
-// import React, { useEffect, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import $ from 'jquery';
-import { messageActions } from '../slices/messagesSlice';
-
-const mapStateToProps = (state) => {
-  const { messages: { byId }, channels: { activeId } } = state;
-  const allMessages = Object.values(byId).filter((el) => el.channelId === activeId);
-  return { allMessages, activeId };
-};
+import messageActions from '../slices/messagesSlice';
 
 const actionCreators = {
   addMessage: messageActions.addMessage,
@@ -31,7 +24,7 @@ const renderMessages = (messages) => {
       <Button className="border-0 text-left" variant="outline-dark" style={{ backgroundColor: '#F6FFF7' }}>
         <div>
           {text}
-          <font className="m-1" size="2" color="gray">{sendTime}</font>
+          <font className="align-bottom mb-1 ml-1" size="2" color="gray">{sendTime}</font>
         </div>
       </Button>
     );
@@ -52,8 +45,14 @@ const renderMessages = (messages) => {
   });
 };
 
+
 const Messages = (props) => {
-  const { data: { messages }, addMessage, allMessages } = props;
+  const allMessages = useSelector((state) => {
+    const { messages, channels: { activeId } } = state;
+    return messages.filter((el) => el.channelId === activeId);
+  });
+
+  const { data: { messages }, addMessage } = props;
 
   useEffect(() => {
     messages.forEach((el) => { addMessage({ message: el }); });
@@ -62,10 +61,4 @@ const Messages = (props) => {
   return renderMessages(allMessages);
 };
 
-export default connect(mapStateToProps, actionCreators)(Messages);
-
-
-// const userName = cookies.get('userName');
-// const MyContext = React.createContext({});
-// const ThingsProvider = MyContext.Provider
-// const things = useContext(MyContext)
+export default connect(null, actionCreators)(Messages);

@@ -12,7 +12,7 @@ const actionCreators = {
 };
 
 const Channels = (props) => {
-  const allChannels = useSelector(({ channels: { byId } }) => byId);
+  const allChannels = useSelector(({ channels: { byId } }) => Object.values(byId));
   const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
 
   const {

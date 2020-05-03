@@ -1,47 +1,26 @@
+/* eslint no-param-reassign: "error" */
+import update from 'immutability-helper';
 import { createSlice } from '@reduxjs/toolkit';
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: { byId: [], activeId: 0 },
+  initialState: { byId: {}, activeId: 0 },
   reducers: {
-    addChannel(state, action) {
-      const { channel } = action.payload;
-      const { byId } = state;
-      return {
-        byId: [...byId, channel],
-        activeId: channel.id,
-      };
+    addChannel: (state, { payload: { channel } }) => {
+      state.byId = { ...state.byId, [channel.id]: channel };
+      state.activeId = channel.id;
     },
-    removeChannel(state, action) {
-      const { id } = action.payload;
-      const { byId } = state;
-      return {
-        byId: byId.filter((el) => el.id !== id),
-        activeId: 0,
-      };
+    removeChannel: (state, { payload: { id } }) => {
+      state.byId = update(state.byId, { $unset: [id] });
     },
-    renameChannel(state, action) {
-      const { channel: { id, name } } = action.payload;
-      const { byId } = state;
-      const renamedChannel = byId.find((el) => el.id === id);
-      const index = byId.indexOf(renamedChannel);
-      const newById = [...byId];
-      newById[index] = { ...renamedChannel, name };
-      return {
-        ...state,
-        byId: newById,
-      };
+    renameChannel: (state, { payload: { channel: { id, name } } }) => {
+      state.byId[id].name = name;
     },
-    selectChannel(state, action) {
-      const { id } = action.payload;
-      return {
-        ...state,
-        activeId: id,
-      };
+    selectChannel: (state, { payload: { id } }) => {
+      state.activeId = id;
     },
   },
 });
-
 
 export default channelsSlice.actions;
 export const { reducer } = channelsSlice;

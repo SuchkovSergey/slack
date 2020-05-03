@@ -1,3 +1,1 @@
-export default {
-  en: 'English',
-};
+export default { en: 'English' };

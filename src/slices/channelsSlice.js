@@ -1,20 +1,20 @@
 /* eslint no-param-reassign: "error" */
-import update from 'immutability-helper';
 import { createSlice } from '@reduxjs/toolkit';
 
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: { byId: {}, activeId: 0 },
+  initialState: { elements: [], activeId: 0 },
   reducers: {
     addChannel: (state, { payload: { channel } }) => {
-      state.byId = { ...state.byId, [channel.id]: channel };
+      state.elements.push(channel);
       state.activeId = channel.id;
     },
     removeChannel: (state, { payload: { id } }) => {
-      state.byId = update(state.byId, { $unset: [id] });
+      state.elements = state.elements.filter((el) => el.id !== id);
     },
     renameChannel: (state, { payload: { channel: { id, name } } }) => {
-      state.byId[id].name = name;
+      const channelIndex = state.elements.findIndex((el) => el.id === id);
+      state.elements[channelIndex].name = name;
     },
     selectChannel: (state, { payload: { id } }) => {
       state.activeId = id;

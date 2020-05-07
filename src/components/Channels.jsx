@@ -1,31 +1,30 @@
 import i18next from 'i18next';
 import { Nav } from 'react-bootstrap';
 import cn from 'classnames';
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
 import { TrashFill, PencilSquare } from 'react-bootstrap-icons';
 import channelsActions from '../slices/channelsSlice';
 
-const actionCreators = {
-  addChannel: channelsActions.addChannel,
-  selectChannel: channelsActions.selectChannel,
-};
-
 const Channels = (props) => {
-  const allChannels = useSelector(({ channels: { byId } }) => Object.values(byId));
+  const dispatch = useDispatch();
+
+  const allChannels = useSelector(({ channels: { elements } }) => elements);
   const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
 
   const {
-    showModal, selectChannel, addChannel, data: { channels },
+    showModal, data: { channels },
   } = props;
 
   const defaultChannelId = 1;
   useEffect(() => {
-    channels.forEach((element) => { addChannel({ channel: element }); });
-    selectChannel({ id: defaultChannelId });
+    channels.forEach((element) => {
+      dispatch(channelsActions.addChannel({ channel: element }));
+    });
+    dispatch(channelsActions.selectChannel({ id: defaultChannelId }));
   }, [null]);
 
-  const handleSelectChannel = (id) => () => { selectChannel({ id }); };
+  const handleSelectChannel = (id) => () => { dispatch(channelsActions.selectChannel({ id })); };
 
   const renderNavs = allChannels.map((el) => {
     const btnClass = cn({
@@ -66,4 +65,4 @@ const Channels = (props) => {
   );
 };
 
-export default connect(null, actionCreators)(Channels);
+export default Channels;

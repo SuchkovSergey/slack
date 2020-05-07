@@ -1,13 +1,9 @@
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import cookies from 'js-cookie';
 import $ from 'jquery';
 import messageActions from '../slices/messagesSlice';
-
-const actionCreators = {
-  addMessage: messageActions.addMessage,
-};
 
 const scrollMessagesTop = () => $('#messages-box').animate({ scrollTop: 100000 }, 'slow');
 
@@ -51,14 +47,14 @@ const Messages = (props) => {
     const { messages, channels: { activeId } } = state;
     return messages.filter((el) => el.channelId === activeId);
   });
-
-  const { data: { messages }, addMessage } = props;
+  const dispatch = useDispatch();
+  const { data: { messages } } = props;
 
   useEffect(() => {
-    messages.forEach((el) => { addMessage({ message: el }); });
+    messages.forEach((el) => { dispatch(messageActions.addMessage({ message: el })); });
   }, [null]);
 
   return renderMessages(allMessages);
 };
 
-export default connect(null, actionCreators)(Messages);
+export default Messages;

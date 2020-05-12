@@ -9,6 +9,8 @@ import resources from './locales';
 import App from './components/App';
 import store from './reducers';
 import listenSocket from './webSockets';
+import renderInitial from './renderInitial';
+import UserNameContext from './userNameContext';
 
 export default (data) => {
   i18next.init({
@@ -18,12 +20,24 @@ export default (data) => {
   });
 
   cookies.set('userName', faker.name.findName());
+  const userName = cookies.get('userName');
+
+  renderInitial(data);
   listenSocket();
 
   render(
     <Provider store={store}>
-      <App data={data} />
+      <UserNameContext.Provider value={userName}>
+        <App data={data} />
+      </UserNameContext.Provider>
     </Provider>,
     document.getElementById('chat'),
   );
+
+  // render(
+  //   <Provider store={store}>
+  //     <App data={data} />
+  //   </Provider>,
+  //   document.getElementById('chat'),
+  // );
 };

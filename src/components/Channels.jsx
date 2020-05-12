@@ -2,27 +2,15 @@ import i18next from 'i18next';
 import { Nav } from 'react-bootstrap';
 import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TrashFill, PencilSquare } from 'react-bootstrap-icons';
 import channelsActions from '../slices/channelsSlice';
 
 const Channels = (props) => {
   const dispatch = useDispatch();
-
   const allChannels = useSelector(({ channels: { elements } }) => elements);
   const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
-
-  const {
-    showModal, data: { channels },
-  } = props;
-
-  const defaultChannelId = 1;
-  useEffect(() => {
-    channels.forEach((element) => {
-      dispatch(channelsActions.addChannel({ channel: element }));
-    });
-    dispatch(channelsActions.selectChannel({ id: defaultChannelId }));
-  }, [null]);
+  const { showModal } = props;
 
   const handleSelectChannel = (id) => () => { dispatch(channelsActions.selectChannel({ id })); };
 

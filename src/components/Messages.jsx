@@ -1,23 +1,19 @@
-import { useSelector, useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import React, { useEffect, useContext } from 'react';
 import { Button } from 'react-bootstrap';
-import cookies from 'js-cookie';
-import $ from 'jquery';
-import messageActions from '../slices/messagesSlice';
+import UserNameContext from '../userNameContext';
 
-const scrollMessagesTop = () => $('#messages-box').animate({ scrollTop: 100000 }, 'slow');
-
-const renderMessages = (messages) => {
+const renderMessages = (messages, scrollRef) => {
   if (messages.length === 0) { return null; }
-  scrollMessagesTop();
-  const currentUser = cookies.get('userName');
+  const currentUser = useContext(UserNameContext);
 
   return messages.map((message) => {
     const {
       text, id, userName, sendTime,
     } = message;
+
     const messageArea = (
-      <Button className="border-0 text-left" variant="outline-dark" style={{ backgroundColor: '#F6FFF7' }}>
+      <Button className="border-0 text-left bg-light" variant="outline-dark" ref={scrollRef}>
         <div>
           {text}
           <font className="align-bottom mb-1 ml-1" size="2" color="gray">{sendTime}</font>
@@ -42,19 +38,15 @@ const renderMessages = (messages) => {
 };
 
 
-const Messages = (props) => {
+const Messages = () => {
   const allMessages = useSelector((state) => {
     const { messages, channels: { activeId } } = state;
     return messages.filter((el) => el.channelId === activeId);
   });
-  const dispatch = useDispatch();
-  const { data: { messages } } = props;
+  const scrollRef = React.createRef();
+  useEffect(() => { scrollRef.current.scrollIntoView(); });
 
-  useEffect(() => {
-    messages.forEach((el) => { dispatch(messageActions.addMessage({ message: el })); });
-  }, [null]);
-
-  return renderMessages(allMessages);
+  return renderMessages(allMessages, scrollRef);
 };
 
 export default Messages;

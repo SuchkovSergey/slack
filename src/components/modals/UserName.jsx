@@ -10,6 +10,7 @@ const generateOnSubmit = ({ onHide }) => (values) => {
   const userName = `${values.name} ${values.surname}`;
   cookies.set('userName', userName);
   onHide();
+  console.log(cookies.get('userName'));
 };
 
 export default (props) => {

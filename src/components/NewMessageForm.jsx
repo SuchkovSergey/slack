@@ -1,38 +1,34 @@
 import i18next from 'i18next';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Formik } from 'formik';
 import { FormControl } from 'react-bootstrap';
-import cookies from 'js-cookie';
+import { format } from 'date-fns';
 import routes from '../routes';
+import UserNameContext from '../userNameContext';
 
 const NewMessageForm = () => {
   const { activeId } = useSelector((state) => state.channels);
+  const userName = useContext(UserNameContext);
 
-  const [showError, setError] = useState(false);
   const inputRef = useRef();
-  const onSubmitHandler = (values, { resetForm }) => {
-    const date = new Date();
-    axios
-      .post(routes.channelMessagesPath(activeId), {
-        data: {
-          attributes: {
-            text: values.text,
-            userName: cookies.get('userName'),
-            sendTime: date.toTimeString().split(' ')[0],
-          },
+
+  const onSubmitHandler = (values, { resetForm, setErrors }) => axios
+    .post(routes.channelMessagesPath(activeId), {
+      data: {
+        attributes: {
+          text: values.text,
+          userName,
+          sendTime: format(new Date(), 'HH:mm:ss'),
         },
-      })
-      .then(() => {
-        resetForm({});
-        setError(false);
-      })
-      .catch(() => { setError(true); });
-  };
+      },
+    })
+    .then(() => { resetForm({}); })
+    .catch(() => { setErrors({ text: i18next.t('errors.newMessageForm') }); });
 
   const formikElement = ({
-    values, isSubmitting, handleChange, handleSubmit,
+    values, isSubmitting, handleChange, handleSubmit, errors,
   }) => {
     useEffect(() => {
       inputRef.current.focus();
@@ -52,7 +48,7 @@ const NewMessageForm = () => {
         />
         <button type="submit" className="input-group-btn btn btn-info">{i18next.t('sendButton')}</button>
         <div className="d-block invalid-feedback">
-          {showError && (<div className="input-feedback text-danger">{i18next.t('errors.network')}</div>)}
+          {errors.text && (<div className="input-feedback text-danger">{errors.text}</div>)}
         &nbsp;
         </div>
       </form>

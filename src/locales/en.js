@@ -22,7 +22,7 @@ export default {
     userNameButton: 'Change my name',
     userNameModalSubmit: 'Confirm',
     errors: {
-      network: 'Network problems. Please, try later',
+      newMessageForm: 'Network problems. Please, try later',
     },
   },
 };

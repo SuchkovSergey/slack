@@ -9,16 +9,15 @@ import routes from '../routes';
 import UserNameContext from '../userNameContext';
 
 const NewMessageForm = () => {
-  const { activeId } = useSelector((state) => state.channels);
+  const activeId = useSelector((state) => state.channels.activeId);
   const userName = useContext(UserNameContext);
-
   const inputRef = useRef();
 
-  const onSubmitHandler = (values, { resetForm, setErrors }) => axios
+  const onSubmitHandler = ({ text }, { resetForm, setErrors }) => axios
     .post(routes.channelMessagesPath(activeId), {
       data: {
         attributes: {
-          text: values.text,
+          text,
           userName,
           sendTime: format(new Date(), 'HH:mm:ss'),
         },
@@ -27,12 +26,11 @@ const NewMessageForm = () => {
     .then(() => { resetForm({}); })
     .catch(() => { setErrors({ text: i18next.t('errors.newMessageForm') }); });
 
-  const formikElement = ({
-    values, isSubmitting, handleChange, handleSubmit, errors,
-  }) => {
-    useEffect(() => {
-      inputRef.current.focus();
-    });
+  const formikElement = (formikProps) => {
+    const {
+      values, isSubmitting, handleChange, handleSubmit, errors,
+    } = formikProps;
+    useEffect(() => { inputRef.current.focus(); });
 
     return (
       <form onSubmit={handleSubmit} className="input-group">
@@ -46,7 +44,7 @@ const NewMessageForm = () => {
           onChange={handleChange}
           disabled={isSubmitting}
         />
-        <button type="submit" className="input-group-btn btn btn-info">{i18next.t('sendButton')}</button>
+        <button type="submit" className="btn btn-info">{i18next.t('sendButton')}</button>
         <div className="d-block invalid-feedback">
           {errors.text && (<div className="input-feedback text-danger">{errors.text}</div>)}
         &nbsp;

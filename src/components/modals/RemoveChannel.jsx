@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import React, { useEffect, useRef } from 'react';
-import { Modal, FormGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import axios from 'axios';
 import routes from '../../routes';
 
@@ -12,24 +12,29 @@ const generateOnSubmit = ({ modalInfo, onHide }) => async () => {
 export default (props) => {
   const { onHide } = props;
   const onSubmit = generateOnSubmit(props);
-
   const inputRef = useRef();
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [null]);
+
+  useEffect(() => { inputRef.current.focus(); }, [null]);
 
   return (
-    <Modal.Dialog centered aria-labelledby="contained-modal-title-vcenter">
-      <Modal.Header closeButton onHide={onHide}>
-        <Modal.Title>{i18next.t('removeTitle')}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <form onSubmit={onSubmit}>
-          <FormGroup>
-            <input ref={inputRef} type="submit" className="btn btn-danger" value={i18next.t('removeChannel')} />
-          </FormGroup>
-        </form>
-      </Modal.Body>
-    </Modal.Dialog>
+    <div className="modal fade show" role="dialog" style={{ display: 'block' }} centered="true">
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h4 className="modal-title">{i18next.t('removeTitle')}</h4>
+            <button onClick={onHide} type="button" className="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={onSubmit}>
+              <FormGroup>
+                <input ref={inputRef} type="submit" className="btn btn-danger" value={i18next.t('removeChannel')} />
+              </FormGroup>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

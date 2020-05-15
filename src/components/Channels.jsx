@@ -11,7 +11,6 @@ const Channels = (props) => {
   const allChannels = useSelector(({ channels: { elements } }) => elements);
   const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
   const { showModal } = props;
-
   const handleSelectChannel = (id) => () => { dispatch(channelsActions.selectChannel({ id })); };
 
   const renderNavs = allChannels.map((el) => {
@@ -23,12 +22,10 @@ const Channels = (props) => {
       <Nav.Item key={el.id} as="li">
         <button type="button" className={btnClass} onClick={handleSelectChannel(el.id)}>
           <div className="float-left">{el.name}</div>
-          {el.removable && (
-            <div className="float-right align-middle">
-              <TrashFill onClick={() => showModal('removeChannel', el)} className="mr-1" />
-              <PencilSquare onClick={() => showModal('renameChannel', el)} />
-            </div>
-          )}
+          <div className="float-right align-middle">
+            {el.removable && <TrashFill onClick={() => showModal('removeChannel', el)} />}
+            <PencilSquare onClick={() => showModal('renameChannel', el)} className="ml-1" />
+          </div>
         </button>
       </Nav.Item>
     );

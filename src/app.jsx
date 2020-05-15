@@ -13,31 +13,18 @@ import renderInitial from './renderInitial';
 import UserNameContext from './userNameContext';
 
 export default (data) => {
-  i18next.init({
-    lng: 'en',
-    debug: true,
-    resources,
-  });
+  i18next.init({ lng: 'en', debug: true, resources });
 
   cookies.set('userName', faker.name.findName());
-  const userName = cookies.get('userName');
-
   renderInitial(data);
   listenSocket();
 
   render(
     <Provider store={store}>
-      <UserNameContext.Provider value={userName}>
+      <UserNameContext.Provider value={cookies.get('userName')}>
         <App data={data} />
       </UserNameContext.Provider>
     </Provider>,
     document.getElementById('chat'),
   );
-
-  // render(
-  //   <Provider store={store}>
-  //     <App data={data} />
-  //   </Provider>,
-  //   document.getElementById('chat'),
-  // );
 };

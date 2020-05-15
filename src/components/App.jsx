@@ -7,17 +7,15 @@ import getModal from './modals/index.js';
 
 const renderModal = ({ modalInfo, hideModal }) => {
   if (!modalInfo.type) { return null; }
-
   const Component = getModal(modalInfo.type);
   return <Component modalInfo={modalInfo} onHide={hideModal} />;
 };
 
-const App = (props) => {
+const App = ({ data }) => {
   const [modalInfo, setModalInfo] = useState({ type: null, item: null });
   const hideModal = () => setModalInfo({ type: null, item: null });
   const showModal = (type, item = null) => setModalInfo({ type, item });
 
-  const { data } = props;
   return (
     <div className="row h-100 border-right">
       <div className="col-3 border-right">

@@ -6,10 +6,12 @@ const messagesSlice = createSlice({
   name: 'messages',
   initialState: [],
   reducers: {
-    addMessage: (state, { payload: { message } }) => { state.push(message); },
+    addMessage: (state, { payload: { message } }) => {
+      state.push(message);
+    },
   },
   extraReducers: {
-    [channelsActions.removeChannel]: (state, { payload: { id } }) => state.filter((el) => el.channelId === id),
+    [channelsActions.removeChannel]: (state, { payload: { id } }) => state.filter(({ channelId }) => channelId === id),
   },
 });
 

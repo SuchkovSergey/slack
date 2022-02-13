@@ -33,7 +33,6 @@ const renderMessages = (message) => {
     );
 };
 
-
 const Messages = () => {
   const allMessages = useSelector((state) => {
     const { messages, channels: { activeId } } = state;

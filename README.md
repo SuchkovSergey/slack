@@ -1,4 +1,4 @@
-[![Node CI](https://github.com/Sergey89274291549/frontend-project-lvl4/workflows/Node.js%20CI/badge.svg)](https://github.com/Sergey89274291549/frontend-project-lvl4/actions)   
+[![Node CI](https://github.com/SuchkovSergey/slack/actions/workflows/nodejs.yml/badge.svg)](https://github.com/SuchkovSergey/slack/actions/workflows/nodejs.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ec37b37894b79ca77cc7/maintainability)](https://codeclimate.com/github/Sergey89274291549/frontend-project-lvl4/maintainability)  
 [![Build Status](https://travis-ci.com/Sergey89274291549/frontend-project-lvl4.svg?branch=master)](https://travis-ci.com/Sergey89274291549/frontend-project-lvl4)
 
@@ -22,10 +22,15 @@ You could create new channels, rename and remove them
 * Deploy (Heroku)
 * Cookies
 
-### Installing
+### Needed technologies
+
+* node v 15.8.0
+* heroku cli
+
+### Installing dependencies
 
 ```
-npm install slack
+yarn
 ```
 
 ### Starting
@@ -33,8 +38,3 @@ npm install slack
 ```
 make start
 ```
-
-### Needed technologies:
-
-* node v 15.8.0
-* heroku cli

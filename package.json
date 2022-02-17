@@ -7,7 +7,7 @@
     "slack": "dist/bin/slack.js"
   },
   "engines": {
-    "node": ">= 13"
+    "node": "15.8.0"
   },
   "scripts": {
     "test": "jest",
@@ -18,12 +18,10 @@
     "postinstall": "npm run build"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sergey89274291549/frontend-project-lvl4.git"
+    "type": "git"
   },
-  "author": "Sergey89274291549",
   "license": "ISC",
-  "homepage": "https://github.com/SergeySuchkov",
+  "homepage": "https://github.com/SuchkovSergey",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "babel-eslint": "^10.1.0",

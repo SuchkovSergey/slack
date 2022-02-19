@@ -11,7 +11,10 @@ const generateOnSubmit = ({ onHide }) => ({ name, surname }) => {
 };
 
 export default (props) => {
-  const form = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { name: '', surname: '' } });
+  const form = useFormik({
+    onSubmit: generateOnSubmit(props),
+    initialValues: { name: '', surname: '' },
+  });
   const { onHide } = props;
   const inputRef = useRef();
   const headerTitle = i18next
@@ -19,16 +22,28 @@ export default (props) => {
     .split('\n')
     .map((line) => <div key={_.uniqueId()}>{line}</div>);
 
-  useEffect(() => { inputRef.current.focus(); }, [null]);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [null]);
 
   return (
-    <div className="modal fade show" role="dialog" style={{ display: 'block' }} centered="true">
+    <div
+      className="modal fade show"
+      role="dialog"
+      style={{ display: 'block' }}
+      centered="true"
+    >
       <div className="modal-overlay" />
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
             <h4 className="modal-title">{headerTitle}</h4>
-            <button onClick={onHide} type="button" className="close" aria-label="Close">
+            <button
+              onClick={onHide}
+              type="button"
+              className="close"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -55,7 +70,11 @@ export default (props) => {
                   name="surname"
                 />
               </FormGroup>
-              <input type="submit" className="btn btn-primary" value={i18next.t('userNameModalSubmit')} />
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value={i18next.t('userNameModalSubmit')}
+              />
             </form>
           </div>
         </div>

@@ -11,7 +11,9 @@ const Channels = (props) => {
   const allChannels = useSelector(({ channels: { elements } }) => elements);
   const activeChannelId = useSelector(({ channels: { activeId } }) => activeId);
   const { showModal } = props;
-  const handleSelectChannel = (id) => () => { dispatch(channelsActions.selectChannel({ id })); };
+  const handleSelectChannel = (id) => () => {
+    dispatch(channelsActions.selectChannel({ id }));
+  };
 
   const renderNavs = allChannels.map((el) => {
     const btnClass = cn({
@@ -19,12 +21,22 @@ const Channels = (props) => {
       active: el.id === activeChannelId,
     });
     return (
-      <Nav.Item key={el.id} as="li">
-        <button type="button" className={btnClass} onClick={handleSelectChannel(el.id)}>
+      <Nav.Item
+        key={el.id}
+        as="li"
+      >
+        <button
+          type="button"
+          className={btnClass}
+          onClick={handleSelectChannel(el.id)}
+        >
           <div className="float-left">{el.name}</div>
           <div className="float-right align-middle">
             {el.removable && <TrashFill onClick={() => showModal('removeChannel', el)} />}
-            <PencilSquare onClick={() => showModal('renameChannel', el)} className="ml-1" />
+            <PencilSquare
+              onClick={() => showModal('renameChannel', el)}
+              className="ml-1"
+            />
           </div>
         </button>
       </Nav.Item>
@@ -43,7 +55,11 @@ const Channels = (props) => {
           {i18next.t('addNewChannel')}
         </button>
       </h5>
-      <Nav as="ul" className="flex-column nav-pills" variant="nav-fill">
+      <Nav
+        as="ul"
+        className="flex-column nav-pills"
+        variant="nav-fill"
+      >
         {renderNavs}
       </Nav>
     </div>

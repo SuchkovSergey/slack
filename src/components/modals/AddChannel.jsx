@@ -15,16 +15,28 @@ export default (props) => {
   const form = useFormik({ onSubmit: generateOnSubmit(props), initialValues: { name: '' } });
   const inputRef = useRef();
 
-  useEffect(() => { inputRef.current.focus(); }, [null]);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [null]);
 
   return (
-    <div className="modal fade show" role="dialog" style={{ display: 'block' }} centered="true">
+    <div
+      className="modal fade show"
+      role="dialog"
+      style={{ display: 'block' }}
+      centered="true"
+    >
       <div className="modal-overlay" />
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
             <h4 className="modal-title">{i18next.t('addNewChannelVersionTwo')}</h4>
-            <button onClick={onHide} type="button" className="close" aria-label="Close">
+            <button
+              onClick={onHide}
+              type="button"
+              className="close"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -41,7 +53,11 @@ export default (props) => {
                   name="name"
                 />
               </FormGroup>
-              <input type="submit" className="btn btn-primary" value={i18next.t('addNewChannel')} />
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value={i18next.t('addNewChannel')}
+              />
             </form>
           </div>
         </div>

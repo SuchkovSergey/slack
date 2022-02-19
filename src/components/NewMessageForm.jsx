@@ -23,17 +23,26 @@ const NewMessageForm = () => {
         },
       },
     })
-    .then(() => { resetForm({}); })
-    .catch(() => { setErrors({ text: i18next.t('errors.newMessageForm') }); });
+    .then(() => {
+      resetForm({});
+    })
+    .catch(() => {
+      setErrors({ text: i18next.t('errors.newMessageForm') });
+    });
 
   const formikElement = (formikProps) => {
     const {
       values, isSubmitting, handleChange, handleSubmit, errors,
     } = formikProps;
-    useEffect(() => { inputRef.current.focus(); });
+    useEffect(() => {
+      inputRef.current.focus();
+    });
 
     return (
-      <form onSubmit={handleSubmit} className="input-group">
+      <form
+        onSubmit={handleSubmit}
+        className="input-group"
+      >
         <FormControl
           id="text"
           required
@@ -44,10 +53,15 @@ const NewMessageForm = () => {
           onChange={handleChange}
           disabled={isSubmitting}
         />
-        <button type="submit" className="btn btn-info">{i18next.t('sendButton')}</button>
+        <button
+          type="submit"
+          className="btn btn-info"
+        >
+          {i18next.t('sendButton')}
+        </button>
         <div className="d-block invalid-feedback">
           {errors.text && (<div className="input-feedback text-danger">{errors.text}</div>)}
-        &nbsp;
+          &nbsp;
         </div>
       </form>
     );
@@ -55,7 +69,10 @@ const NewMessageForm = () => {
 
   return (
     <div className="app mt-auto">
-      <Formik initialValues={{ text: '' }} onSubmit={onSubmitHandler}>
+      <Formik
+        initialValues={{ text: '' }}
+        onSubmit={onSubmitHandler}
+      >
         {formikElement}
       </Formik>
     </div>

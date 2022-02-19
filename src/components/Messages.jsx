@@ -10,23 +10,38 @@ const renderMessages = (message) => {
   } = message;
 
   const messageArea = (
-    <Button className="border-0 text-left bg-light" variant="outline-dark">
+    <Button
+      className="border-0 text-left bg-light"
+      variant="outline-dark"
+    >
       <div>
         {text}
-        <font className="align-bottom mb-1 ml-1" size="2" color="gray">{sendTime}</font>
+        <font
+          className="align-bottom mb-1 ml-1"
+          size="2"
+          color="gray"
+        >
+          {sendTime}
+        </font>
       </div>
     </Button>
   );
   const userNameArea = <b className="m-1">{userName}</b>;
   return currentUser === userName
     ? (
-      <div key={id} className="text-right m-2">
+      <div
+        key={id}
+        className="text-right m-2"
+      >
         {messageArea}
         {userNameArea}
       </div>
     )
     : (
-      <div key={id} className="m-2">
+      <div
+        key={id}
+        className="m-2"
+      >
         {userNameArea}
         {messageArea}
       </div>
@@ -40,7 +55,9 @@ const Messages = () => {
   });
   const scrollRef = useRef();
 
-  useEffect(() => { scrollRef.current.scrollIntoView(); });
+  useEffect(() => {
+    scrollRef.current.scrollIntoView();
+  });
 
   return (
     <>

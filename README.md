@@ -3,7 +3,7 @@
 
 [Welcome to the slack](https://slack-sergey-suchkov.herokuapp.com/)
 
-# Slack
+## Slack
 
 ### About
 
@@ -29,7 +29,7 @@ You could create new channels, rename and remove them
 ### Installing dependencies
 
 ```
-yarn
+npm install
 ```
 
 ### Starting

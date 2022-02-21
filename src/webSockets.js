@@ -9,16 +9,16 @@ export default () => {
 
   socket
     .connect()
-    .on('newMessage', (res) => {
-      store.dispatch(addMessage({ message: res.data.attributes }));
+    .on('newMessage', (response) => {
+      store.dispatch(addMessage({ message: response.data.attributes }));
     })
-    .on('newChannel', (res) => {
-      store.dispatch(addChannel({ channel: res.data.attributes }));
+    .on('newChannel', (response) => {
+      store.dispatch(addChannel({ channel: response.data.attributes }));
     })
-    .on('renameChannel', (res) => {
-      store.dispatch(renameChannel({ channel: res.data.attributes }));
+    .on('renameChannel', (response) => {
+      store.dispatch(renameChannel({ channel: response.data.attributes }));
     })
-    .on('removeChannel', (res) => {
-      store.dispatch(removeChannel({ id: res.data.id }));
+    .on('removeChannel', (response) => {
+      store.dispatch(removeChannel({ id: response.data.id }));
     });
 };

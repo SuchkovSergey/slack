@@ -14,11 +14,12 @@ export default {
     removeTitle: 'Are you sure?',
     renameChannel: 'Rename',
     renameTitle: 'Write new title here',
-    userNameModalTitle: "Hi! It seems that you wanna change your name in the chat.\nPlease, leave it below.\nOtherwise there will be a random one ;)\nHope you'll enjoy!",
+    userNameModalTitle: 'Hi! It seems that you want to change your name in the chat.<br>'
+      + "Please, leave it below.<br>Otherwise there will be a random one ;)<br>Hope you'll enjoy!",
     userNameModalName: "What's your name?",
     userNamePlaceholder: 'for example, Sergey',
     userNameModalSurname: "What's your surname?",
-    userSuramePlaceholder: 'for example, Suchkov',
+    userSurnamePlaceholder: 'for example, Suchkov',
     userNameButton: 'Change my name',
     userNameModalSubmit: 'Confirm',
     errors: {

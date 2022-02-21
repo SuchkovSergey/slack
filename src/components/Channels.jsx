@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import { Nav } from 'react-bootstrap';
-import cn from 'classnames';
+import classNames from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import { TrashFill, PencilSquare } from 'react-bootstrap-icons';
@@ -16,7 +16,7 @@ const Channels = (props) => {
   };
 
   const renderNavs = allChannels.map((el) => {
-    const btnClass = cn({
+    const btnClass = classNames({
       'nav-link btn btn-block m-1': true,
       active: el.id === activeChannelId,
     });

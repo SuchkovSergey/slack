@@ -1,4 +1,3 @@
-/* eslint no-param-reassign: "error" */
 import { createSlice } from '@reduxjs/toolkit';
 
 const channelsSlice = createSlice({

@@ -9,7 +9,7 @@ import routes from '../routes';
 import UserNameContext from '../userNameContext';
 
 const NewMessageForm = () => {
-  const activeId = useSelector((state) => state.channels.activeId);
+  const activeId = useSelector(({ channels }) => channels.activeId);
   const userName = useContext(UserNameContext);
   const inputRef = useRef();
 

@@ -15,7 +15,7 @@ const Channels = (props) => {
     dispatch(channelsActions.selectChannel({ id }));
   };
 
-  const renderNavs = allChannels.map((el) => {
+  const renderNavs = () => allChannels.map((el) => {
     const btnClass = classNames({
       'nav-link btn btn-block m-1': true,
       active: el.id === activeChannelId,
@@ -60,7 +60,7 @@ const Channels = (props) => {
         className="flex-column nav-pills"
         variant="nav-fill"
       >
-        {renderNavs}
+        {renderNavs()}
       </Nav>
     </div>
   );

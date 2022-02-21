@@ -3,7 +3,7 @@ import React, { useEffect, useContext, useRef } from 'react';
 import { Button } from 'react-bootstrap';
 import UserNameContext from '../userNameContext';
 
-const renderMessages = (message) => {
+const renderMessages = (messages) => messages.map((message) => {
   const currentUser = useContext(UserNameContext);
   const {
     text, id, userName, sendTime,
@@ -46,12 +46,12 @@ const renderMessages = (message) => {
         {messageArea}
       </div>
     );
-};
+});
 
 const Messages = () => {
   const allMessages = useSelector((state) => {
     const { messages, channels: { activeId } } = state;
-    return messages.filter((el) => el.channelId === activeId);
+    return messages.filter(({ channelId }) => channelId === activeId);
   });
   const scrollRef = useRef();
 
@@ -61,7 +61,7 @@ const Messages = () => {
 
   return (
     <>
-      {allMessages.map(renderMessages)}
+      {renderMessages(allMessages)}
       <div ref={scrollRef} />
     </>
   );

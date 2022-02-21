@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import routes from '../../routes';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '../common/ModalContainer';
 
 const generateOnSubmit = ({ onHide }) => async ({ name }) => {
   await axios.post(routes.channelsPath(), {

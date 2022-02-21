@@ -1,8 +1,5 @@
 // @ts-check
 
-// const isProduction = process.env.NODE_ENV === 'production';
-// const isDevelopment = !isProduction;
-
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [

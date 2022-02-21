@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import cookies from 'js-cookie';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '../common/ModalContainer';
 
 const generateOnSubmit = ({ onHide }) => ({ name, surname }) => {
   cookies.set('userName', `${name} ${surname}`);

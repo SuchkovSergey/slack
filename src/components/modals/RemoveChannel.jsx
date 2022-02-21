@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import axios from 'axios';
 import routes from '../../routes';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '../common/ModalContainer';
 
 const generateOnSubmit = ({ modalInfo, onHide }) => async () => {
   await axios.delete(routes.channelPath(modalInfo.item.id), {});

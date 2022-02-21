@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import routes from '../../routes';
-import ModalContainer from './ModalContainer';
+import ModalContainer from '../common/ModalContainer';
 
 const generateOnSubmit = ({ modalInfo, onHide }) => async ({ name }) => {
   await axios.patch(routes.channelPath(modalInfo.item.id), { data: { attributes: { name } } });
